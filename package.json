@@ -29,6 +29,8 @@
     "event-emitter": "^0.3.5",
     "microservices": "^0.1.0",
     "mysql2": "^3.4.0",
+    "pg": "^8.11.0",
+    "pg-listen": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.17"

@@ -9,7 +9,7 @@ async function bootstrap() {
       transport: Transport.TCP,
     },
   );
-  // app.listen();
+  app.listen();
   // const app1 = await NestFactory.createMicroservice<MicroserviceOptions>(
   //   AppModule,
   //   {

@@ -5,16 +5,20 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Coffee } from './coffees.entity';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { Queue } from './queue.entity';
+import { QueueSubscriber } from './queue.subscriber';
+import { CreateSubscriber } from './types';
 
 @Module({
-  imports: [EventEmitterModule.forRoot(), TypeOrmModule.forFeature([Coffee]), TypeOrmModule.forRoot({
-    type: 'mysql',
+  imports: [EventEmitterModule.forRoot(), TypeOrmModule.forFeature([Coffee, Queue]), TypeOrmModule.forRoot({
+    type: 'postgres',
     host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'microservice_coffee',
-    entities: [Coffee],
+    port: 5432,
+    username: 'postgres',
+    password: '12345678',
+    database: 'coffee_shop',
+    entities: [Coffee, Queue],
+    autoLoadEntities: true,
     synchronize: true,
   }), ClientsModule.register([
     {
@@ -25,6 +29,6 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       }
     }])],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, QueueSubscriber],
 })
 export class AppModule { }
